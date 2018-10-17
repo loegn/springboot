@@ -1,14 +1,10 @@
 server.port: 8081
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8&useUnicode=true
-    username: root
-    password: 123456
-  redis:
-    host: localhost
-    password: 123456
-    database: 1
-    timeout: 5s
+  profiles:
+    active: dev
+mybatis:
+  type-aliases-package: com.test.springboot.pojo
+  mapper-locations: classpath:mapper/*.xml
 logging:
   file: "log/my.log"
   file.max-history: 10
@@ -22,3 +18,20 @@ test:
       port: 2
     - host: 2
       port: 2
+
+---
+
+#开发配置
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8&useUnicode=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+#    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: localhost
+    password: 123456
+    database: 0
+    timeout: 5s

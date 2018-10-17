@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.springboot.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.test.springboot.pojo.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="last_modify_date" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="last_login_date" jdbcType="TIMESTAMP" property="lastLoginDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, version, create_date, last_modify_date, username, password, last_login_ip, last_login_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.test.springboot.pojo.User">
+    insert into user (id, version, create_date, 
+      last_modify_date, username, password, 
+      last_login_ip, last_login_date)
+    values (#{id,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.springboot.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="lastModifyDate != null">
+        last_modify_date,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="lastLoginDate != null">
+        last_login_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyDate != null">
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDate != null">
+        #{lastLoginDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.springboot.pojo.User">
+    update user
+    <set>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyDate != null">
+        last_modify_date = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDate != null">
+        last_login_date = #{lastLoginDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.springboot.pojo.User">
+    update user
+    set version = #{version,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_modify_date = #{lastModifyDate,jdbcType=TIMESTAMP},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      last_login_date = #{lastLoginDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
