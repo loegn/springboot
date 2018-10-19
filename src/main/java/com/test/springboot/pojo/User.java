@@ -3,7 +3,7 @@ package com.test.springboot.pojo;
 import java.util.Date;
 
 public class User {
-    private Long id;
+    private Integer id;
 
     private Integer version;
 
@@ -19,11 +19,11 @@ public class User {
 
     private Date lastLoginDate;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
