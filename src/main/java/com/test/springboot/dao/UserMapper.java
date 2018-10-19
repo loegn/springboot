@@ -1,7 +1,6 @@
 package com.test.springboot.dao;
 
 import com.test.springboot.pojo.User;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
