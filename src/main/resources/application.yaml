@@ -13,11 +13,14 @@ logging:
     root: info
     dr uid.sql.Statement: debug
 test:
+  q: 1
+  b: 2
+  c.a: 3
   array:
-    - host: 1
-      port: 2
-    - host: 2
-      port: 2
+  - host: 1
+    port: 2
+  - host: 2
+    port: 2
 
 ---
 
