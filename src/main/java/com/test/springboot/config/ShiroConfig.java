@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.apache.shiro.mgt.SecurityManager;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -33,8 +34,13 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        Map<String,String> map = new HashMap<String, String>();
+        Map<String,String> map = new LinkedHashMap<String, String>();
         //登出
+        map.put("/","anon");
+        map.put("/index.html","anon");
+        map.put("/js/**","anon");
+        map.put("/css/**","anon");
+        map.put("/image/anon/**","anon");
         map.put("/logout","logout");
         //对所有用户认证
         map.put("/**","authc");
