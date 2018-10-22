@@ -23,4 +23,10 @@ public class UserServiceImpl implements UserService {
     public User getByUsername(String username) {
         return userMapper.selectByUsername(username);
     }
+
+    @Override
+    public Boolean updateById(User user) {
+        int success = userMapper.updateByPrimaryKeySelective(user);
+        return success >= 1 ? true : false;
+    }
 }
