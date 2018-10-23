@@ -1,6 +1,6 @@
 package com.test.springboot.service.Impl;
 
-import com.test.springboot.dao.UserRepository;
+import com.test.springboot.dao.UserDao;
 import com.test.springboot.pojo.User;
 import com.test.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +12,20 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    private final UserDao userDao;
+
+    @Autowired
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Override
     public User getByUsername(String username) {
-        return null;
+        return userDao.findByUsername(username);
     }
 
     @Override
     public Boolean updateById(User user) {
-        return true;
+        return false;
     }
 }

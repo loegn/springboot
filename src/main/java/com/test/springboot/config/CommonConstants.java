@@ -5,5 +5,6 @@ package com.test.springboot.config;
  * @author: liangenmao
  */
 public class CommonConstants {
-    public static final String MAPPERSCAN = "com.test.springboot.dao";
+    //mybatis的mapper路径
+//    public static final String MAPPERSCAN = "com.test.springboot.dao";
 }
