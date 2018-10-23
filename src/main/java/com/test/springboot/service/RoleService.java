@@ -1,6 +1,6 @@
 package com.test.springboot.service;
 
-import com.test.springboot.pojo.Role;
+import com.test.springboot.entity.Role;
 
 import java.util.List;
 

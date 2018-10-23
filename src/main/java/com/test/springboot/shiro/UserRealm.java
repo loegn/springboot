@@ -1,9 +1,9 @@
 package com.test.springboot.shiro;
 
 
-import com.test.springboot.pojo.Permission;
-import com.test.springboot.pojo.Role;
-import com.test.springboot.pojo.User;
+import com.test.springboot.entity.Permission;
+import com.test.springboot.entity.Role;
+import com.test.springboot.entity.User;
 import com.test.springboot.service.PermissionService;
 import com.test.springboot.service.RoleService;
 import com.test.springboot.service.UserService;

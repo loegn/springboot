@@ -1,6 +1,6 @@
 package com.test.springboot.service;
 
-import com.test.springboot.pojo.Permission;
+import com.test.springboot.entity.Permission;
 
 import java.util.List;
 
