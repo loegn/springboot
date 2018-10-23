@@ -1,7 +1,10 @@
 package com.test.springboot.pojo;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class Permission {
     private Integer id;
 
@@ -15,51 +18,4 @@ public class Permission {
 
     private Boolean isEnable;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getLastModifyDate() {
-        return lastModifyDate;
-    }
-
-    public void setLastModifyDate(Date lastModifyDate) {
-        this.lastModifyDate = lastModifyDate;
-    }
-
-    public String getPermissionName() {
-        return permissionName;
-    }
-
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName == null ? null : permissionName.trim();
-    }
-
-    public Boolean getIsEnable() {
-        return isEnable;
-    }
-
-    public void setIsEnable(Boolean isEnable) {
-        this.isEnable = isEnable;
-    }
 }

@@ -27,6 +27,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean updateById(User user) {
         int success = userMapper.updateByPrimaryKeySelective(user);
-        return success >= 1 ? true : false;
+        return success >= 1;
     }
 }

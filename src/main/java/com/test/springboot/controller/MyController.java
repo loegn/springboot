@@ -15,8 +15,12 @@ import java.util.Date;
 //@Controller
 @RestController
 public class MyController {
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public MyController(UserService userService) {
+        this.userService = userService;
+    }
 //    public static final Logger log = LoggerFactory.getLogger(MyController.class);
 
 /*    //错误页面展示
@@ -26,17 +30,18 @@ public class MyController {
     }*/
 
     @RequestMapping("/login")
-    public Object login(String username,String password,HttpServletRequest request){
+    public String login(String username, String password, HttpServletRequest request) {
         if (username == null || password == null)
             return "用户名和密码不能为空";
         Subject subject = SecurityUtils.getSubject();
-        if (subject!=null && subject.isAuthenticated())
+        if (subject != null && subject.isAuthenticated())
             return "已登录";
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
         //进行验证，这里可以捕获异常，然后返回对应信息
         try {
+            assert subject != null;
             subject.login(usernamePasswordToken);
-        }catch (Exception e){
+        } catch (Exception e) {
             return e.getMessage();
         }
         //保存最后一次登录相关信息
@@ -45,7 +50,13 @@ public class MyController {
         user1.setId(user.getId());
         user1.setLastLoginDate(new Date());
         user1.setLastLoginIp(request.getRemoteAddr());
-        userService.updateById(user1);
-        return "登录成功";
+        if (userService.updateById(user1))
+            return "登录成功";
+        return "登录成功,但最后一次登录信息保存失败";
+    }
+
+    @RequestMapping("/test")
+    public Object test() {
+        return true;
     }
 }

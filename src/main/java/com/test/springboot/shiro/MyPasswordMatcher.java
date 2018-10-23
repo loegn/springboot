@@ -13,9 +13,7 @@ public class MyPasswordMatcher extends PasswordMatcher {
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
         Object submittedPassword = getSubmittedPassword(token);
         Object storedCredentials = getStoredPassword(info);
-        if (submittedPassword.toString().equals(storedCredentials.toString()))
-            return true;
-        return false;
+        return submittedPassword.toString().equals(storedCredentials.toString());
     }
 
     @Override
