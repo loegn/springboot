@@ -3,7 +3,6 @@ package com.test.springboot.dao;
 import com.test.springboot.pojo.User;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
