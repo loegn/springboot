@@ -1,6 +1,6 @@
 package com.test.springboot.service.Impl;
 
-import com.test.springboot.entity.Role;
+import com.test.springboot.pojo.Role;
 import com.test.springboot.service.RoleService;
 import org.springframework.stereotype.Service;
 

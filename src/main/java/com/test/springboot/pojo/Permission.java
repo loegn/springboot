@@ -1,4 +1,4 @@
-package com.test.springboot.entity;
+package com.test.springboot.pojo;
 
 import lombok.Data;
 

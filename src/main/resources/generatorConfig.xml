@@ -14,7 +14,7 @@
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
-        <javaModelGenerator targetPackage="com.test.springboot.entity" targetProject="E:\OneDrive\WorkSpace\IdeaProjects\springboot\src\main\java">
+        <javaModelGenerator targetPackage="com.test.springboot.pojo" targetProject="E:\OneDrive\WorkSpace\IdeaProjects\springboot\src\main\java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>

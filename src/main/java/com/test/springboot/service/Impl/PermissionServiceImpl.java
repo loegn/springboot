@@ -1,6 +1,6 @@
 package com.test.springboot.service.Impl;
 
-import com.test.springboot.entity.Permission;
+import com.test.springboot.pojo.Permission;
 import com.test.springboot.service.PermissionService;
 import org.springframework.stereotype.Service;
 
