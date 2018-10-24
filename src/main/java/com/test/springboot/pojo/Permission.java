@@ -14,15 +14,9 @@ public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private Integer version;
-
     private Date createDate;
-
     private Date lastModifyDate;
-
     private String permissionName;
-
     private Boolean isEnable;
-
 }

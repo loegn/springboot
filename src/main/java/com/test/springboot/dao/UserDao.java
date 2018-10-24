@@ -2,7 +2,6 @@ package com.test.springboot.dao;
 
 import com.test.springboot.pojo.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
