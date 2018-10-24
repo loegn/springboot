@@ -51,6 +51,7 @@ public class ShiroConfig {
         map.put("/image/anon/**", "anon");
         map.put("/login", "anon");
         map.put("/logout", "logout");
+        map.put("/admin/**", "roles[admin]");
         //对所有用户认证
         map.put("/**", "authc");
         //登录页面

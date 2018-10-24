@@ -23,13 +23,17 @@ public class UserRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        String username = (String) SecurityUtils.getSubject().getPrincipal();
-        User user = userService.getByUsername(username);
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        for (Role role : user.getRoleList()){
-            info.addRole(role.getRoleName());
-            for (Permission permission : role.getPermissionList())
-                info.addStringPermission(permission.getPermissionName());
+        if (user.getRoleList() != null) {
+            for (Role role : user.getRoleList()) {
+                info.addRole(role.getRoleName());
+                if (role.getPermissionList() != null) {
+                    for (Permission permission : role.getPermissionList()) {
+                        info.addStringPermission(permission.getPermissionName());
+                    }
+                }
+            }
         }
         return info;
     }
@@ -44,6 +48,6 @@ public class UserRealm extends AuthorizingRealm {
             throw new UnknownAccountException("用户名或密码不正确");
         if (!user.getPassword().equals(password))
             throw new IncorrectCredentialsException("用户名或密码不正确");
-        return new SimpleAuthenticationInfo(user,password,getName());
+        return new SimpleAuthenticationInfo(user, password, getName());
     }
 }
