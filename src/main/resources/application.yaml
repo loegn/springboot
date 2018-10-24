@@ -50,4 +50,11 @@ spring:
     host: localhost
     password: 123456
     database: 0
-    timeout: 5s
+    timeout: 10s
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
+#        max-wait: -1ms
+        max-idle: 8
+#        min-idle: 0

@@ -6,11 +6,14 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Objects;
 
 //@Controller
 @RestController
@@ -18,8 +21,9 @@ public class MyController {
     private final UserService userService;
 
     @Autowired
-    public MyController(UserService userService) {
+    public MyController(UserService userService, JedisConnectionFactory jedisConnectionFactory) {
         this.userService = userService;
+        this.jedisConnectionFactory = jedisConnectionFactory;
     }
 //    public static final Logger log = LoggerFactory.getLogger(MyController.class);
 
@@ -61,14 +65,24 @@ public class MyController {
     }
 
     @RequestMapping("/test/q")
-    public Object testq() {
+    public Object testTwo() {
         return true;
     }
 
     @RequestMapping("/test/w")
-    public Object testw() {
+    public Object testOne() {
         System.out.println("start");
         System.out.println("end");
         return true;
+    }
+
+    private final JedisConnectionFactory jedisConnectionFactory;
+
+    @RequestMapping("/redis")
+    public Object testRedis(){
+        //得到一个连接
+        RedisConnection conn = jedisConnectionFactory.getConnection();
+        conn.set("hello".getBytes(), "world".getBytes());
+        return new String(Objects.requireNonNull(conn.get("hello".getBytes())));
     }
 }
