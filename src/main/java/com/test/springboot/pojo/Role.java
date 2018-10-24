@@ -19,7 +19,7 @@ public class Role {
     private Date lastModifyDate;
     private String roleName;
     private Boolean isEnable;
-    @ManyToMany(cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinTable(name = "role_permission",joinColumns = @JoinColumn(name="role_id",referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(name = "permission_id",referencedColumnName = "id"))
     private List<Permission> permissionList;
 }
