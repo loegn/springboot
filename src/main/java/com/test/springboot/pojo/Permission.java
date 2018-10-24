@@ -3,11 +3,13 @@ package com.test.springboot.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Entity
-public class Permission {
+public class Permission implements Serializable {
+    private static final long serialVersionUID = 6353085922685750392L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

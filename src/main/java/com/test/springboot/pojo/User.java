@@ -4,13 +4,15 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Data
 @Entity
 @ToString(exclude = "roleList")
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = -921750836981071896L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
