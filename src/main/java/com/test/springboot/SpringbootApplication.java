@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 //import org.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@ServletComponentScan(value = CommonConstants.SERVLET_COMPONENT_SCAN)
+@ServletComponentScan(value = {CommonConstants.FILTER_SCAN, CommonConstants.LISTENER_SCAN})
 //@MapperScan(CommonConstants.MAPPERSCAN)
 public class SpringbootApplication {
 
