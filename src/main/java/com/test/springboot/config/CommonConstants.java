@@ -7,4 +7,5 @@ package com.test.springboot.config;
 public class CommonConstants {
     //mybatis的mapper路径
 //    public static final String MAPPERSCAN = "com.test.springboot.dao";
+    public static final String SERVLET_COMPONENT_SCAN = "com.test.springboot.filter";
 }

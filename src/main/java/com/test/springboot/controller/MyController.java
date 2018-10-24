@@ -45,7 +45,7 @@ public class MyController {
             return e.getMessage();
         }
         //保存最后一次登录相关信息
-        User user = userService.getByUsername(username);
+        User user = (User) subject.getPrincipal();
         User user1 = new User();
         user1.setId(user.getId());
         user1.setLastLoginDate(new Date());
@@ -57,6 +57,18 @@ public class MyController {
 
     @RequestMapping("/test")
     public Object test() {
+        return true;
+    }
+
+    @RequestMapping("/test/q")
+    public Object testq() {
+        return true;
+    }
+
+    @RequestMapping("/test/w")
+    public Object testw() {
+        System.out.println("start");
+        System.out.println("end");
         return true;
     }
 }
