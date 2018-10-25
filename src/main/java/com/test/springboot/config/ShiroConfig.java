@@ -1,6 +1,7 @@
 package com.test.springboot.config;
 
 import com.test.springboot.shiro.MyPasswordMatcher;
+import com.test.springboot.shiro.MyShiroFilter;
 import com.test.springboot.shiro.UserRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -41,10 +43,13 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        //自定义shiro过滤器
+        Map<String, Filter> filterMap = shiroFilterFactoryBean.getFilters();
+        filterMap.put("myauthc", new MyShiroFilter());
         shiroFilterFactoryBean.setSecurityManager(securityManager);
+        //权限控制
         Map<String, String> map = new LinkedHashMap<>();
-        //登出
-        map.put("/", "anon");
+        map.put("/", "myauthc");
         map.put("/index.html", "anon");
         map.put("/js/**", "anon");
         map.put("/css/**", "anon");
@@ -52,6 +57,7 @@ public class ShiroConfig {
         map.put("/login", "anon");
         map.put("/logout", "logout");
         map.put("/admin/**", "roles[admin]");
+        map.put("/userandadmin/**", "roles[admin,user]");
         //对所有用户认证
         map.put("/**", "authc");
         //登录页面
@@ -59,7 +65,7 @@ public class ShiroConfig {
         //首页
         shiroFilterFactoryBean.setSuccessUrl("/use_ center.html");
         //错误页面，认证不通过跳转
-        shiroFilterFactoryBean.setUnauthorizedUrl("/error");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/index.html");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
     }

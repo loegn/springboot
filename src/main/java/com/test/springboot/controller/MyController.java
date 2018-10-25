@@ -79,10 +79,15 @@ public class MyController {
     private final JedisConnectionFactory jedisConnectionFactory;
 
     @RequestMapping("/redis")
-    public Object testRedis(){
+    public Object testRedis() {
         //得到一个连接
         RedisConnection conn = jedisConnectionFactory.getConnection();
         conn.set("hello".getBytes(), "world".getBytes());
         return new String(Objects.requireNonNull(conn.get("hello".getBytes())));
+    }
+
+    @RequestMapping("/throwError")
+    public Object throwError() {
+        throw new RuntimeException("出错了");
     }
 }
