@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 //@Controller
@@ -34,7 +36,7 @@ public class MyController {
     }*/
 
     @RequestMapping("/login")
-    public String login(String username, String password, HttpServletRequest request) {
+    public Object login(String username, String password, HttpServletRequest request) {
         if (username == null || password == null)
             return "用户名和密码不能为空";
         Subject subject = SecurityUtils.getSubject();
@@ -89,5 +91,14 @@ public class MyController {
     @RequestMapping("/throwError")
     public Object throwError() {
         throw new RuntimeException("出错了");
+    }
+
+    @RequestMapping("/json")
+    public Object json(){
+        Map<String, java.io.Serializable> map = new HashMap<>();
+        map.put("int",1);
+        map.put("boolean",true);
+        map.put("string","jsonp");
+        return map;
     }
 }
