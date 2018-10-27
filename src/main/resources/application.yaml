@@ -40,6 +40,7 @@ spring:
   jpa:
     database: MYSQL
     show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: validate
 #      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
