@@ -101,4 +101,9 @@ public class MyController {
         map.put("string","jsonp");
         return map;
     }
+
+    @RequestMapping("/query")
+    public Object query(){
+        return userService.getByUsername("1");
+    }
 }
