@@ -21,13 +21,18 @@ import java.util.Set;
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+    @Bean
+    public MyInterceptor myInterceptor() {
+        return new MyInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //注册自定义拦截器，添加拦截路径和排除拦截路径
         List<String> strings = new ArrayList<>();
         strings.add("/login");
         strings.add("/interceptor/**");
-        registry.addInterceptor(new MyInterceptor()).addPathPatterns(strings).excludePathPatterns("/interceptor/exclude");
+        registry.addInterceptor(myInterceptor()).addPathPatterns(strings).excludePathPatterns("/interceptor/exclude");
     }
 
     @Bean
