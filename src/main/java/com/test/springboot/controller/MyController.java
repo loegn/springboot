@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,7 @@ public class MyController {
         return "error ok!";
     }*/
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Object login(String username, String password, HttpServletRequest request) {
         if (username == null || password == null)
             return "用户名和密码不能为空";

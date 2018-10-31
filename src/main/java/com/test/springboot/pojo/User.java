@@ -2,6 +2,7 @@ package com.test.springboot.pojo;
 
 import lombok.Data;
 import lombok.ToString;
+//import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,8 @@ import java.util.List;
 @Data
 @Entity
 @ToString(exclude = "roleList")
+@Table(indexes = {@Index(columnList = "is_delete")})
+//@Where(clause = "is_delete = 1")
 public class User implements Serializable {
     private static final long serialVersionUID = -921750836981071896L;
     @Id
@@ -25,6 +28,8 @@ public class User implements Serializable {
     private String password;
     private String lastLoginIp;
     private Date lastLoginDate;
+    @Column(name = "is_delete", nullable = false)
+    private Boolean isDelete = false;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roleList;
