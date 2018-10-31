@@ -41,7 +41,8 @@ public class MyErrorController implements ErrorController {
         Map<String, Object> body = getErrorAttributes(request,
                 isIncludeStackTrace(request, MediaType.ALL));
         HttpStatus status = getStatus(request);
-        return getError(request).getMessage();
+        Throwable throwable = getError(request);
+        return throwable == null ? null : throwable.getMessage();
     }
 
     /**

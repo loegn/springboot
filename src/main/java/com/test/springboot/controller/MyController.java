@@ -8,7 +8,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +35,7 @@ public class MyController {
         return "error ok!";
     }*/
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public Object login(String username, String password, HttpServletRequest request) {
         if (username == null || password == null)
             return "用户名和密码不能为空";
@@ -52,26 +52,25 @@ public class MyController {
         }
         //保存最后一次登录相关信息
         User user = (User) subject.getPrincipal();
-        User user1 = new User();
-        user1.setId(user.getId());
-        user1.setLastLoginDate(new Date());
-        user1.setLastLoginIp(request.getRemoteAddr());
-        if (userService.updateById(user1))
+        user.setId(user.getId());
+        user.setLastLoginDate(new Date());
+        user.setLastLoginIp(request.getRemoteAddr());
+        if (userService.updateById(user))
             return "登录成功";
         return "登录成功,但最后一次登录信息保存失败";
     }
 
-    @RequestMapping("/test")
+    @GetMapping("/test")
     public Object test() {
         return true;
     }
 
-    @RequestMapping("/test/q")
+    @GetMapping("/test/q")
     public Object testTwo() {
         return true;
     }
 
-    @RequestMapping("/test/w")
+    @GetMapping("/test/w")
     public Object testOne() {
         System.out.println("start");
         System.out.println("end");
@@ -80,7 +79,7 @@ public class MyController {
 
     private final JedisConnectionFactory jedisConnectionFactory;
 
-    @RequestMapping("/redis")
+    @GetMapping("/redis")
     public Object testRedis() {
         //得到一个连接
         RedisConnection conn = jedisConnectionFactory.getConnection();
@@ -88,12 +87,12 @@ public class MyController {
         return new String(Objects.requireNonNull(conn.get("hello".getBytes())));
     }
 
-    @RequestMapping("/throwError")
+    @GetMapping("/throwError")
     public Object throwError() {
         throw new RuntimeException("出错了");
     }
 
-    @RequestMapping("/json")
+    @GetMapping("/json")
     public Object json(){
         Map<String, java.io.Serializable> map = new HashMap<>();
         map.put("int",1);
@@ -103,8 +102,16 @@ public class MyController {
         return map;
     }
 
-    @RequestMapping("/query")
+    @GetMapping("/query")
     public Object query(){
         return userService.getByUsername("1");
+    }
+
+    @GetMapping("/addUser")
+    public Object addUser(){
+        User user1 = new User();
+        user1.setUsername("3");
+        user1.setPassword("3");
+        return userService.addUser(user1);
     }
 }

@@ -10,4 +10,5 @@ import com.test.springboot.pojo.User;
 public interface UserService {
     User getByUsername(String username);
     Boolean updateById(User user);
+    User addUser(User user);
 }
