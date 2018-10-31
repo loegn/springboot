@@ -13,6 +13,7 @@ public class Permission implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Version
     private Integer version;
     private Date createDate;
     private Date lastModifyDate;

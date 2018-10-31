@@ -29,9 +29,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public Boolean updateById(User user) {
         try{
+            user.setLastModifyDate(new Date());
             userDao.save(user);
         }catch (StaleObjectStateException e){
             return false;
