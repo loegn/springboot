@@ -99,6 +99,7 @@ public class MyController {
         map.put("int",1);
         map.put("boolean",true);
         map.put("string","jsonp");
+        map.put("data",new Date());
         return map;
     }
 
