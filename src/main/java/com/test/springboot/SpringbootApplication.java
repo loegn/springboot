@@ -8,7 +8,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.WebApplicationInitializer;
 
 //import org.mybatis.spring.annotation.MapperScan;
 
@@ -17,7 +16,7 @@ import org.springframework.web.WebApplicationInitializer;
 @SpringBootApplication
 @ServletComponentScan(value = {CommonConstants.FILTER_SCAN, CommonConstants.LISTENER_SCAN})
 //@MapperScan(CommonConstants.MAPPERSCAN)
-public class SpringbootApplication  extends SpringBootServletInitializer implements WebApplicationInitializer {
+public class SpringbootApplication  extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
