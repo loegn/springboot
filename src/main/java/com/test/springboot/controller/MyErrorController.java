@@ -42,7 +42,8 @@ public class MyErrorController implements ErrorController {
                 isIncludeStackTrace(request, MediaType.ALL));
         HttpStatus status = getStatus(request);
         Throwable throwable = getError(request);
-        return throwable == null ? null : throwable.getMessage();
+//        return throwable == null ? "error" : throwable.getMessage() == null ? "error" : throwable.getMessage() ;
+        return throwable == null ? (status == null ? "error" : status.value()) : throwable;
     }
 
     /**

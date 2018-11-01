@@ -2,12 +2,11 @@ package com.test.springboot.controller;
 
 import com.test.springboot.pojo.User;
 import com.test.springboot.service.UserService;
+import com.test.springboot.utils.RedisUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,17 +15,17 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 //@Controller
 @RestController
 public class MyController {
     private final UserService userService;
+    private final RedisUtils redisUtils;
 
     @Autowired
-    public MyController(UserService userService, JedisConnectionFactory jedisConnectionFactory) {
+    public MyController(UserService userService, RedisUtils redisUtils) {
         this.userService = userService;
-        this.jedisConnectionFactory = jedisConnectionFactory;
+        this.redisUtils = redisUtils;
     }
 //    public static final Logger log = LoggerFactory.getLogger(MyController.class);
 
@@ -78,14 +77,11 @@ public class MyController {
         return true;
     }
 
-    private final JedisConnectionFactory jedisConnectionFactory;
-
     @GetMapping("/redis")
     public Object testRedis() {
         //得到一个连接
-        RedisConnection conn = jedisConnectionFactory.getConnection();
-        conn.set("hello".getBytes(), "world".getBytes());
-        return new String(Objects.requireNonNull(conn.get("hello".getBytes())));
+        redisUtils.set("hello", "world");
+        return redisUtils.get("hello");
     }
 
     @GetMapping("/throwError")
