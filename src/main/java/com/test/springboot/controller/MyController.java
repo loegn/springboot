@@ -1,5 +1,6 @@
 package com.test.springboot.controller;
 
+import com.test.springboot.config.CommonConstants;
 import com.test.springboot.pojo.User;
 import com.test.springboot.service.UserService;
 import com.test.springboot.utils.RedisUtils;
@@ -37,19 +38,25 @@ public class MyController {
 
     @PostMapping("/login")
     public Object login(String username, String password, HttpServletRequest request) {
-        if (username == null || password == null)
-            return "用户名和密码不能为空";
         Subject subject = SecurityUtils.getSubject();
         if (subject != null && subject.isAuthenticated())
             return "已登录";
+        if (username == null || password == null)
+            return "用户名和密码不能为空";
+        Object o = redisUtils.hget(username, CommonConstants.LOGIN_ATTEMPTS_NUM);
+        int num = o == null ? 0 : Integer.parseInt(o.toString());
+        if (num >= CommonConstants.MAX_LOGIN_ATTEMPTS_NUM)
+            return "请稍后重试";
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
         //进行验证，这里可以捕获异常，然后返回对应信息
         try {
             assert subject != null;
             subject.login(usernamePasswordToken);
         } catch (Exception e) {
+            redisUtils.hset(username, CommonConstants.LOGIN_ATTEMPTS_NUM, num + 1, CommonConstants.LOGIN_ATTEMPTS_EXPIRE_TIME);
             return e.getMessage();
         }
+        redisUtils.hset(username, CommonConstants.LOGIN_ATTEMPTS_NUM, 0, 0);
         //保存最后一次登录相关信息
         User user = (User) subject.getPrincipal();
         user.setId(user.getId());
