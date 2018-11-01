@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -47,5 +48,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
         factoryBean.setConverters(converters);
 
         return factoryBean.getObject();
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedMethods("*")
+                .allowedOrigins("*")
+                .allowedHeaders("*");
     }
 }
