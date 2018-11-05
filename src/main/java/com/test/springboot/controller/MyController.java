@@ -118,4 +118,9 @@ public class MyController {
         user1.setPassword("3");
         return userService.addUser(user1);
     }
+
+    @GetMapping("/aop")
+    public Object aop(){
+        return "aop";
+    }
 }
