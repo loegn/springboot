@@ -57,6 +57,11 @@ public class ShiroConfig {
         map.put("/login", "anon");
         map.put("/logout", "logout");
         map.put("/admin/**", "roles[admin]");
+        map.put("/swagger-ui.html#/**","roles[system]");
+        map.put("/swagger-ui.html#!/**","roles[system]");
+        map.put("/swagger-ui.html","roles[system]");
+        map.put("/swagger-ui.html#/","roles[system]");
+        map.put("/druid/**","roles[system]");
         map.put("/userandadmin/**", "roles[admin,user]");
         //对所有用户认证
         map.put("/**", "authc");
