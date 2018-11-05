@@ -1,7 +1,7 @@
 package com.test.springboot.controller;
 
 import com.test.springboot.config.CommonConstants;
-import com.test.springboot.pojo.User;
+import com.test.springboot.entity.User;
 import com.test.springboot.service.UserService;
 import com.test.springboot.utils.RedisUtils;
 import org.apache.shiro.SecurityUtils;

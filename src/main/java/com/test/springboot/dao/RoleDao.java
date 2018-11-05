@@ -1,6 +1,6 @@
 package com.test.springboot.dao;
 
-import com.test.springboot.pojo.Role;
+import com.test.springboot.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

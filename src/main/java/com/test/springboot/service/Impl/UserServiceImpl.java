@@ -1,12 +1,11 @@
 package com.test.springboot.service.Impl;
 
 import com.test.springboot.dao.UserDao;
-import com.test.springboot.pojo.User;
+import com.test.springboot.entity.User;
 import com.test.springboot.service.UserService;
 import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 

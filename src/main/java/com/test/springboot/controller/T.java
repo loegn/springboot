@@ -1,6 +1,6 @@
 //package com.test.springboot.controller;
 //
-//import com.test.springboot.pojo.User;
+//import com.test.springboot.entity.User;
 //import com.test.springboot.service.UserService;
 //import org.apache.shiro.SecurityUtils;
 //import org.apache.shiro.authc.UsernamePasswordToken;

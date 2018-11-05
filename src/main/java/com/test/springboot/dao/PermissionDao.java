@@ -1,6 +1,6 @@
 package com.test.springboot.dao;
 
-import com.test.springboot.pojo.Permission;
+import com.test.springboot.entity.Permission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
