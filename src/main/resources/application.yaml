@@ -16,6 +16,7 @@ logging:
   level:
     root: info
     druid.sql.Statement: debug
+    org.hibernate: error
 #test:
 #  q: 1
 #  b: 2
