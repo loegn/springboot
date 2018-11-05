@@ -56,7 +56,8 @@ public class MyController {
             redisUtils.hset(username, CommonConstants.LOGIN_ATTEMPTS_NUM, num + 1, CommonConstants.LOGIN_ATTEMPTS_EXPIRE_TIME);
             return e.getMessage();
         }
-        redisUtils.hset(username, CommonConstants.LOGIN_ATTEMPTS_NUM, 0, 0);
+        if (o != null)
+            redisUtils.hdel(username, CommonConstants.LOGIN_ATTEMPTS_NUM);
         //保存最后一次登录相关信息
         User user = (User) subject.getPrincipal();
         user.setId(user.getId());

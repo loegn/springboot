@@ -15,7 +15,7 @@ logging:
   file.max-size: 10MB
   level:
     root: info
-    dr uid.sql.Statement: debug
+    druid.sql.Statement: debug
 #test:
 #  q: 1
 #  b: 2
