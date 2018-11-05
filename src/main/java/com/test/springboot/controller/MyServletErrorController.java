@@ -13,6 +13,7 @@ public class MyServletErrorController {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public Object errorHandler(Exception e) {
+        e.printStackTrace();
         return e;
     }
 }
