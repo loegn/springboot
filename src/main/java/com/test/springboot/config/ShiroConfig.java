@@ -26,6 +26,14 @@ public class ShiroConfig {
         return new MyPasswordMatcher();
     }
 
+//    @Bean
+//    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+//        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+//        hashedCredentialsMatcher.setHashAlgorithmName("SHA-256");//散列算法:MD2、MD5、SHA-1、SHA-256、SHA-384、SHA-512等。
+//        hashedCredentialsMatcher.setHashIterations(1);//散列的次数，默认1次， 设置两次相当于 md5(md5(""));
+//        return hashedCredentialsMatcher;
+//    }
+
     @Bean
     public UserRealm myUserRealm(@Qualifier("myPasswordMatcher") MyPasswordMatcher myPasswordMatcher) {
         UserRealm userRealm = new UserRealm();

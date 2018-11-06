@@ -3,6 +3,7 @@ package com.test.springboot.service.Impl;
 import com.test.springboot.dao.UserDao;
 import com.test.springboot.entity.User;
 import com.test.springboot.service.UserService;
+import com.test.springboot.shiro.PasswordUtils;
 import org.hibernate.StaleObjectStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,15 +25,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByUsername(String username) {
-        return userDao.findByUsernameAndIsDelete(username,false);
+        return userDao.findByUsernameAndIsDelete(username, false);
     }
 
     @Override
     public Boolean updateById(User user) {
-        try{
+        try {
             user.setLastModifyDate(new Date());
             userDao.save(user);
-        }catch (StaleObjectStateException e){
+        } catch (StaleObjectStateException e) {
             return false;
         }
         return true;
@@ -40,11 +41,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
-        User user1 = new User();
-        user1.setUsername(user.getUsername());
-        user1.setPassword(user.getPassword());
-        user1.setCreateDate(new Date());
-        user1.setLastModifyDate(new Date());
-        return userDao.save(user1);
+        User saveUser = new User();
+        saveUser.setUsername(user.getUsername());
+        saveUser.setSalt(PasswordUtils.generateSalt());
+        saveUser.setHashIterations(1);
+        saveUser.setPassword(PasswordUtils.encryptPassword(user.getPassword(), saveUser.getSalt(), saveUser.getHashIterations()));
+        saveUser.setCreateDate(new Date());
+        saveUser.setLastModifyDate(new Date());
+        return userDao.save(saveUser);
     }
 }

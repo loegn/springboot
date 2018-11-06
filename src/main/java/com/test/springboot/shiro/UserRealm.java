@@ -11,6 +11,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -42,12 +43,9 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         UsernamePasswordToken myToken = (UsernamePasswordToken) token;
         String username = myToken.getUsername();
-        String password = new String(myToken.getPassword());
         User user = userService.getByUsername(username);
         if (user == null)
             throw new UnknownAccountException("用户名或密码不正确");
-        if (!user.getPassword().equals(password))
-            throw new IncorrectCredentialsException("用户名或密码不正确");
-        return new SimpleAuthenticationInfo(user, password, getName());
+        return new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
     }
 }

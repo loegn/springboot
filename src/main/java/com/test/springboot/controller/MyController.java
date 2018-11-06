@@ -6,6 +6,7 @@ import com.test.springboot.service.UserService;
 import com.test.springboot.utils.RedisUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -112,11 +113,14 @@ public class MyController {
         return userService.getByUsername("1");
     }
 
-    @GetMapping("/addUser")
-    public Object addUser() {
+    @RequiresRoles("admin")
+    @PostMapping("/addUser")
+    public Object addUser(String username, String password) {
+        if (userService.getByUsername(username) != null)
+            return "用户名已存在";
         User user1 = new User();
-        user1.setUsername("3");
-        user1.setPassword("3");
+        user1.setUsername(username);
+        user1.setPassword(password);
         return userService.addUser(user1);
     }
 
