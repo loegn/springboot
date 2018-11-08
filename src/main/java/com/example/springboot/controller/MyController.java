@@ -4,6 +4,8 @@ import com.example.springboot.config.CommonConstants;
 import com.example.springboot.entity.User;
 import com.example.springboot.service.UserService;
 import com.example.springboot.utils.RedisUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -100,12 +103,20 @@ public class MyController {
 
     @GetMapping("/json")
     public Object json() {
-        Map<String, java.io.Serializable> map = new HashMap<>();
-        map.put("int", 1);
-        map.put("boolean", true);
-        map.put("string", "jsonp");
-        map.put("data", new Date());
-        return map;
+        ObjectMapper mapper = new ObjectMapper();
+        User user = userService.getByUsername("1");
+        String userStr = "";
+        try {
+            userStr = mapper.writeValueAsString(user);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+//        try {
+//            User userJ = mapper.readValue(userStr,User.class);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        return userStr;
     }
 
     @GetMapping("/query")
