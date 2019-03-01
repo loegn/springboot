@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -138,5 +139,11 @@ public class MyController {
     @GetMapping("/aop")
     public Object aop(){
         return "aop";
+    }
+
+    @GetMapping("/forward")
+    public ModelAndView forward(){
+        ModelAndView modelAndView = new ModelAndView("forward:/test/q");
+        return modelAndView;
     }
 }
