@@ -6,6 +6,7 @@ import com.example.springboot.service.UserService;
 import com.example.springboot.utils.RedisUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.util.concurrent.RateLimiter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -21,10 +22,12 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 //@Controller
 @RestController
 public class MyController {
+    private static RateLimiter rateLimiter = RateLimiter.create(10);
     private final UserService userService;
     private final RedisUtils redisUtils;
 
@@ -137,13 +140,25 @@ public class MyController {
     }
 
     @GetMapping("/aop")
-    public Object aop(){
+    public Object aop() {
         return "aop";
     }
 
     @GetMapping("/forward")
-    public ModelAndView forward(){
+    public ModelAndView forward() {
         ModelAndView modelAndView = new ModelAndView("forward:/test/q");
         return modelAndView;
+    }
+
+    @GetMapping(value = "/anon/utf", produces = "application/json; charset=utf-8")
+    public Object utf() {
+        return "测试一下";
+    }
+
+    @GetMapping(value = "/anon/concurrence")
+    public Object utf2() {
+        String result = "等待" + rateLimiter.acquire();
+        System.out.println(result);
+        return result;
     }
 }

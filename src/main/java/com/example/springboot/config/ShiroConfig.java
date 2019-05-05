@@ -63,6 +63,7 @@ public class ShiroConfig {
         map.put("/css/**", "anon");
         map.put("/image/anon/**", "anon");
         map.put("/login", "anon");
+        map.put("/anon/**", "anon");
         map.put("/logout", "logout");
         map.put("/admin/**", "roles[admin]");
         map.put("/swagger-ui.html#/**","roles[system]");
