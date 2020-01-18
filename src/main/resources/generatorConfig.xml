@@ -3,29 +3,40 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <classPathEntry  location="C:\Users\liang\.m2\repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
-    <context id="DB2Tables"  targetRuntime="MyBatis3">
+    <!--    <properties resource="generatorConfig.properties"></properties>-->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="true"/>
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8&amp;useUnicode=true" userId="root" password="123456">
+        <!--        数据库配置-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3356/mydb?characterEncoding=UTF-8&amp;useUnicode=true"
+                        userId="root" password="123456">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
-        <javaModelGenerator targetPackage="com.example.springboot.entity" targetProject="E:\OneDrive\WorkSpace\IdeaProjects\springboot\src\main\java">
+        <!--        java对象目录-->
+        <javaModelGenerator targetPackage="com.example.springboot.entity"
+                            targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
-        <sqlMapGenerator targetPackage="mapper" targetProject="E:\OneDrive\WorkSpace\IdeaProjects\springboot\src\main\resources">
+        <!--        xml目录-->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.springboot.dao" targetProject="E:\OneDrive\WorkSpace\IdeaProjects\springboot\src\main\java">
+        <!--        dao目录-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.springboot.dao"
+                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="null" domainObjectName="null" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">        </table>
+        <table tableName="enum_test" domainObjectName="EnumTest" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"></table>
 
     </context>
 </generatorConfiguration>

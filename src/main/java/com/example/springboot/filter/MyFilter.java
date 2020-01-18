@@ -19,6 +19,11 @@ public class MyFilter implements Filter {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("MyFilter过滤");
         filterChain.doFilter(servletRequest, servletResponse);

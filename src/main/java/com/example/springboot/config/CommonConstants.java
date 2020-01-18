@@ -6,7 +6,7 @@ package com.example.springboot.config;
  */
 public class CommonConstants {
     //mybatis的mapper路径
-//    public static final String MAPPERSCAN = "com.example.springboot.dao";
+    public static final String MAPPERSCAN = "com.example.springboot.dao";
     /**
      * 过滤器扫描根目录
      */

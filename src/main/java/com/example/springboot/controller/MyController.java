@@ -131,8 +131,9 @@ public class MyController {
     @RequiresRoles("admin")
     @PostMapping("/addUser")
     public Object addUser(String username, String password) {
-        if (userService.getByUsername(username) != null)
+        if (userService.getByUsername(username) != null) {
             return "用户名已存在";
+        }
         User user1 = new User();
         user1.setUsername(username);
         user1.setPassword(password);
@@ -157,7 +158,8 @@ public class MyController {
 
     @GetMapping(value = "/anon/concurrence")
     public Object utf2() {
-        String result = "等待" + rateLimiter.acquire();
+//        String result = "等待" + rateLimiter.acquire();
+        String result = "执行" + rateLimiter.tryAcquire();
         System.out.println(result);
         return result;
     }

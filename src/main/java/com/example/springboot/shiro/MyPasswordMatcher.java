@@ -17,10 +17,11 @@ public class MyPasswordMatcher extends PasswordMatcher {
         Object storedCredentials = getStoredPassword(info);
         User user = (User) info.getPrincipals().getPrimaryPrincipal();
         String password = PasswordUtils.encryptPassword(submittedPassword.toString(), user.getSalt(), user.getHashIterations());
-        if (!storedCredentials.toString().equals(password))
+        if (!storedCredentials.toString().equals(password)) {
             throw new IncorrectCredentialsException("用户名或密码不正确");
-        else
+        } else {
             return true;
+        }
     }
 
     @Override

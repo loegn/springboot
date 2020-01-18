@@ -21,10 +21,12 @@ public class DateConverter implements Converter<String, Date> {
     @Override
     public Date convert(String source) {
         try {
-            if (source.length() == DATE_FORMAT_STRING.length())
+            if (source.length() == DATE_FORMAT_STRING.length()) {
                 return DATE_FORMAT.parse(source);
-            if (source.length() == DATETIME_FORMAT_STRING.length())
+            }
+            if (source.length() == DATETIME_FORMAT_STRING.length()) {
                 return DATETIME_FORMAT.parse(source);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
