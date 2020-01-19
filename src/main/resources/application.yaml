@@ -9,6 +9,8 @@ spring:
 mybatis:
   type-aliases-package: com.example.springboot.entity
   mapper-locations: classpath:mapper/*.xml
+  #不生效？
+  type-handlers-package: com.example.springboot.mybatis.handler
 logging:
   file: "log/my.log"
   file.max-history: 10
